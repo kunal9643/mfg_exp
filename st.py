@@ -48,7 +48,7 @@ if uploaded_files:
 
 
 #PART 2
-genai.configure(api_key="AIzaSyAbz47y3xigQw295DYXdG5arLbknOoZsqw")
+genai.configure(api_key=st.secrets["K"])
 model = genai.GenerativeModel(model_name="gemini-1.5-flash-001")
 folder_path = "uploaded_images"
 
