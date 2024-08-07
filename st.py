@@ -13,7 +13,9 @@ st.set_page_config(layout="wide")
 upload_folder = "uploaded_images"
 if not os.path.exists(upload_folder):
     os.makedirs(upload_folder)
-
+else:
+    shutil.rmtree('uploaded_images')
+    os.makedirs(upload_folder)
 st.title("Image Upload and Storage")
 uploaded_files = st.file_uploader("Choose images", type=['png', 'jpg', 'jpeg', 'heic'], accept_multiple_files=True)
 
