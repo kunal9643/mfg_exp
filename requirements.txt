@@ -1,0 +1,5 @@
+streamlit
+Pillow
+pillow_heif
+google-generativeai
+pandas
