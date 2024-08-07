@@ -20,31 +20,31 @@ st.title("Image Upload and Storage")
 uploaded_files = st.file_uploader("Choose images", type=['png', 'jpg', 'jpeg', 'heic'], accept_multiple_files=True)
 
 if uploaded_files:
-    for uploaded_file in uploaded_files:
-        file_extension = uploaded_file.name.split('.')[-1].lower()
-        file_path = os.path.join(upload_folder, uploaded_file.name)
+    st.spinner(text="In progress..."):
+        for uploaded_file in uploaded_files:
+            file_extension = uploaded_file.name.split('.')[-1].lower()
+            file_path = os.path.join(upload_folder, uploaded_file.name)
         
-        if file_extension == 'heic':
-            heif_file = pillow_heif.read_heif(uploaded_file)
-            image = Image.frombytes(
-                heif_file.mode,
-                heif_file.size,
-                heif_file.data,
-                "raw",
-                heif_file.mode,
-                heif_file.stride,
-            )
-            file_path = os.path.splitext(file_path)[0] + '.jpg'
-            image.save(file_path, "JPEG")
-        else:
-            with open(file_path, "wb") as f:
-                f.write(uploaded_file.getbuffer())
-            image = Image.open(uploaded_file)
+            if file_extension == 'heic':
+                heif_file = pillow_heif.read_heif(uploaded_file)
+                image = Image.frombytes(
+                    heif_file.mode,
+                    heif_file.size,
+                    heif_file.data,
+                    "raw",
+                    heif_file.mode,
+                    heif_file.stride,
+                )
+                file_path = os.path.splitext(file_path)[0] + '.jpg'
+                image.save(file_path, "JPEG")
+            else:
+                with open(file_path, "wb") as f:
+                    f.write(uploaded_file.getbuffer())
+                image = Image.open(uploaded_file)
+st.write("Images uploaded successfully")
+        #st.success(f"Saved file: {uploaded_file.name}")
+        #st.image(image, caption=uploaded_file.name, width=50)
 
-        st.success(f"Saved file: {uploaded_file.name}")
-        st.image(image, caption=uploaded_file.name, width=50)
-
-st.write("All files uploaded succesfully")
 
 
 #PART 2
