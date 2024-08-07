@@ -20,7 +20,7 @@ st.title("Image Upload and Storage")
 uploaded_files = st.file_uploader("Choose images", type=['png', 'jpg', 'jpeg', 'heic'], accept_multiple_files=True)
 
 if uploaded_files:
-    st.spinner(text="In progress..."):
+    with st.spinner(text="In progress..."):
         for uploaded_file in uploaded_files:
             file_extension = uploaded_file.name.split('.')[-1].lower()
             file_path = os.path.join(upload_folder, uploaded_file.name)
@@ -41,7 +41,7 @@ if uploaded_files:
                 with open(file_path, "wb") as f:
                     f.write(uploaded_file.getbuffer())
                 image = Image.open(uploaded_file)
-st.write("Images uploaded successfully")
+    st.success("Images uploaded successfully")
         #st.success(f"Saved file: {uploaded_file.name}")
         #st.image(image, caption=uploaded_file.name, width=50)
 
